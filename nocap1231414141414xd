@@ -1,4 +1,4 @@
-if getgenv().Sexualomg then return getgenv().Sexualomg end
+if getgenv().Aiming then return getgenv().Aiming end
 
 -- // Services
 local Players = game:GetService("Players")
@@ -34,7 +34,7 @@ local tableremove = table.remove
 local tableinsert = table.insert
 
 -- // Silent Aim Vars
-getgenv().Sexualomg = {
+getgenv().Aiming = {
     Enabled = true,
 
     ShowFOV = false,
@@ -66,31 +66,30 @@ getgenv().Sexualomg = {
         }
     }
 }
-local Sexualomg = getgenv().Sexualomg
+local Aiming = getgenv().Aiming
 
 -- // Create circle
 local circle = Drawingnew("Circle")
-circle.Transparency = Sexualomg.Transparency
+circle.Transparency = 1
 circle.Thickness = 2
-circle.Color = Sexualomg.FOVColour
+circle.Color = Aiming.FOVColour
 circle.Filled = false
-Sexualomg.FOVCircle = circle
+circle.Transparency = Aiming.Transparency
+Aiming.FOVCircle = circle
 
 -- // Update
-function Sexualomg.UpdateFOV()
+function Aiming.UpdateFOV()
     -- // Make sure the circle exists
     if not (circle) then
         return
     end
 
     -- // Set Circle Properties
-    circle.Visible = Sexualomg.ShowFOV
-    circle.Radius = (Sexualomg.FOV * 3)
+    circle.Visible = Aiming.ShowFOV
+    circle.Radius = (Aiming.FOV * 3)
     circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
-    circle.NumSides = Sexualomg.FOVSides
-    circle.Color = Sexualomg.FOVColour
-    circle.Transparency = Sexualomg.Transparency
-    circle.Filled = Sexualomg.Filled
+    circle.NumSides = Aiming.FOVSides
+    circle.Color = Aiming.FOVColour
 
     -- // Return circle
     return circle
@@ -109,7 +108,7 @@ local CalcChance = function(percentage)
 end
 
 -- // Customisable Checking Functions: Is a part visible
-function Sexualomg.IsPartVisible(Part, PartDescendant)
+function Aiming.IsPartVisible(Part, PartDescendant)
     -- // Vars
     local Character = LocalPlayer.Character or CharacterAddedWait(CharacterAdded)
     local Origin = CurrentCamera.CFrame.Position
@@ -141,9 +140,9 @@ function Sexualomg.IsPartVisible(Part, PartDescendant)
 end
 
 -- // Ignore player
-function Sexualomg.IgnorePlayer(Player)
+function Aiming.IgnorePlayer(Player)
     -- // Vars
-    local Ignored = Sexualomg.Ignored
+    local Ignored = Aiming.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Find player in table
@@ -160,9 +159,9 @@ function Sexualomg.IgnorePlayer(Player)
 end
 
 -- // Unignore Player
-function Sexualomg.UnIgnorePlayer(Player)
+function Aiming.UnIgnorePlayer(Player)
     -- // Vars
-    local Ignored = Sexualomg.Ignored
+    local Ignored = Aiming.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Find player in table
@@ -180,9 +179,9 @@ function Sexualomg.UnIgnorePlayer(Player)
 end
 
 -- // Ignore team
-function Sexualomg.IgnoreTeam(Team, TeamColor)
+function Aiming.IgnoreTeam(Team, TeamColor)
     -- // Vars
-    local Ignored = Sexualomg.Ignored
+    local Ignored = Aiming.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Find team in table
@@ -199,9 +198,9 @@ function Sexualomg.IgnoreTeam(Team, TeamColor)
 end
 
 -- // Unignore team
-function Sexualomg.UnIgnoreTeam(Team, TeamColor)
+function Aiming.UnIgnoreTeam(Team, TeamColor)
     -- // Vars
-    local Ignored = Sexualomg.Ignored
+    local Ignored = Aiming.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Find team in table
@@ -219,18 +218,18 @@ function Sexualomg.UnIgnoreTeam(Team, TeamColor)
 end
 
 -- //  Toggle team check
-function Sexualomg.TeamCheck(Toggle)
+function Aiming.TeamCheck(Toggle)
     if (Toggle) then
-        return Sexualomg.IgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
+        return Aiming.IgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
     end
 
-    return Sexualomg.UnIgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
+    return Aiming.UnIgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
 end
 
 -- // Check teams
-function Sexualomg.IsIgnoredTeam(Player)
+function Aiming.IsIgnoredTeam(Player)
     -- // Vars
-    local Ignored = Sexualomg.Ignored
+    local Ignored = Aiming.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Check if team is ignored
@@ -246,9 +245,9 @@ function Sexualomg.IsIgnoredTeam(Player)
 end
 
 -- // Check if player (and team) is ignored
-function Sexualomg.IsIgnored(Player)
+function Aiming.IsIgnored(Player)
     -- // Vars
-    local Ignored = Sexualomg.Ignored
+    local Ignored = Aiming.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Loop
@@ -265,11 +264,11 @@ function Sexualomg.IsIgnored(Player)
     end
 
     -- // Team check
-    return Sexualomg.IsIgnoredTeam(Player)
+    return Aiming.IsIgnoredTeam(Player)
 end
 
 -- // Get the Direction, Normal and Material
-function Sexualomg.Raycast(Origin, Destination, UnitMultiplier)
+function Aiming.Raycast(Origin, Destination, UnitMultiplier)
     if (typeof(Origin) == "Vector3" and typeof(Destination) == "Vector3") then
         -- // Handling
         if (not UnitMultiplier) then UnitMultiplier = 1 end
@@ -292,14 +291,14 @@ function Sexualomg.Raycast(Origin, Destination, UnitMultiplier)
 end
 
 -- // Get Character
-function Sexualomg.Character(Player)
+function Aiming.Character(Player)
     return Player.Character
 end
 
 -- // Check Health
-function Sexualomg.CheckHealth(Player)
+function Aiming.CheckHealth(Player)
     -- // Get Humanoid
-    local Character = Sexualomg.Character(Player)
+    local Character = Aiming.Character(Player)
     local Humanoid = FindFirstChildWhichIsA(Character, "Humanoid")
 
     -- // Get Health
@@ -310,14 +309,14 @@ function Sexualomg.CheckHealth(Player)
 end
 
 -- // Check if silent aim can used
-function Sexualomg.Check()
-    return (Sexualomg.Enabled == true and Sexualomg.Selected ~= LocalPlayer and Sexualomg.SelectedPart ~= nil)
+function Aiming.Check()
+    return (Aiming.Enabled == true and Aiming.Selected ~= LocalPlayer and Aiming.SelectedPart ~= nil)
 end
-Sexualomg.checkSilentAim = Sexualomg.Check
+Aiming.checkSilentAim = Aiming.Check
 
 -- // Get Closest Target Part
-function Sexualomg.GetClosestTargetPartToCursor(Character)
-    local TargetParts = Sexualomg.TargetPart
+function Aiming.GetClosestTargetPartToCursor(Character)
+    local TargetParts = Aiming.TargetPart
 
     -- // Vars
     local ClosestPart = nil
@@ -386,17 +385,17 @@ function Sexualomg.GetClosestTargetPartToCursor(Character)
 end
 
 -- // Silent Aim Function
-function Sexualomg.GetClosestPlayerToCursor()
+function Aiming.GetClosestPlayerToCursor()
     -- // Vars
     local TargetPart = nil
     local ClosestPlayer = nil
-    local Chance = CalcChance(Sexualomg.HitChance)
+    local Chance = CalcChance(Aiming.HitChance)
     local ShortestDistance = 1/0
 
     -- // Chance
     if (not Chance) then
-        Sexualomg.Selected = LocalPlayer
-        Sexualomg.SelectedPart = nil
+        Aiming.Selected = LocalPlayer
+        Aiming.SelectedPart = nil
 
         return LocalPlayer
     end
@@ -404,19 +403,19 @@ function Sexualomg.GetClosestPlayerToCursor()
     -- // Loop through all players
     for _, Player in ipairs(GetPlayers(Players)) do
         -- // Get Character
-        local Character = Sexualomg.Character(Player)
+        local Character = Aiming.Character(Player)
 
         -- // Make sure isn't ignored and Character exists
-        if (Sexualomg.IsIgnored(Player) == false and Character) then
+        if (Aiming.IsIgnored(Player) == false and Character) then
             -- // Vars
-            local TargetPartTemp, _, _, Magnitude = Sexualomg.GetClosestTargetPartToCursor(Character)
+            local TargetPartTemp, _, _, Magnitude = Aiming.GetClosestTargetPartToCursor(Character)
 
             -- // Check if part exists and health
-            if (TargetPartTemp and Sexualomg.CheckHealth(Player)) then
+            if (TargetPartTemp and Aiming.CheckHealth(Player)) then
                 -- // Check if is in FOV
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
-                    if (Sexualomg.VisibleCheck and not Sexualomg.IsPartVisible(TargetPartTemp, Character)) then continue end
+                    if (Aiming.VisibleCheck and not Aiming.IsPartVisible(TargetPartTemp, Character)) then continue end
 
                     -- // Set vars
                     ClosestPlayer = Player
@@ -428,15 +427,15 @@ function Sexualomg.GetClosestPlayerToCursor()
     end
 
     -- // End
-    Sexualomg.Selected = ClosestPlayer
-    Sexualomg.SelectedPart = TargetPart
+    Aiming.Selected = ClosestPlayer
+    Aiming.SelectedPart = TargetPart
 end
 
 -- // Heartbeat Function
 Heartbeat:Connect(function()
-    Sexualomg.UpdateFOV()
-    Sexualomg.GetClosestPlayerToCursor()
+    Aiming.UpdateFOV()
+    Aiming.GetClosestPlayerToCursor()
 end)
 
 -- //
-return Sexualomg
+return Aiming
