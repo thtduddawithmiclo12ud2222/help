@@ -11,21 +11,21 @@ local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local CurrentCamera = Workspace.CurrentCamera
 
-local Sexualist = {
+local Pornografia = {
     SilentAim = true,
     AimLock = false,
     Prediction = 0.157,
     AutoPrediction = false,
     AimLockKeybind = Enum.KeyCode.E
 }
-getgenv().Sexualist = Sexualist
+getgenv().Pornografia = Pornografia
 
-function Sexualist.Check()
-    if not (Sexualist.Enabled == true and Sexualist.Selected ~= LocalPlayer and Sexualist.SelectedPart ~= nil) then
+function Pornografia.Check()
+    if not (Pornografia.Enabled == true and Pornografia.Selected ~= LocalPlayer and Pornografia.SelectedPart ~= nil) then
         return false
     end
 
-    local Character = Sexualist.Character(Sexualist.Selected)
+    local Character = Pornografia.Character(Pornografia.Selected)
     local KOd = Character:WaitForChild("BodyEffects")["K.O"].Value
     local Grabbed = Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
 
@@ -38,11 +38,11 @@ end
 
 local __index
 __index = hookmetamethod(game, "__index", function(t, k)
-    if (t:IsA("Mouse") and (k == "Hit" or k == "Target") and Sexualist.Check()) then
-        local SelectedPart = Sexualist.SelectedPart
+    if (t:IsA("Mouse") and (k == "Hit" or k == "Target") and Pornografia.Check()) then
+        local SelectedPart = Pornografia.SelectedPart
 
-        if (Sexualist.SilentAim and (k == "Hit" or k == "Target")) then
-            local Hit = SelectedPart.CFrame + (SelectedPart.Velocity * Sexualist.Prediction)
+        if (Pornografia.SilentAim and (k == "Hit" or k == "Target")) then
+            local Hit = SelectedPart.CFrame + (SelectedPart.Velocity * Pornografia.Prediction)
 
             return (k == "Hit" and Hit or SelectedPart)
         end
@@ -52,16 +52,16 @@ __index = hookmetamethod(game, "__index", function(t, k)
 end)
 
 RunService:BindToRenderStep("AimLock", 0, function()
-    if (Sexualist.AimLock and Sexualist.Check() and UserInputService:IsKeyDown(Sexualist.AimLockKeybind)) then
-        local SelectedPart = Sexualist.SelectedPart
+    if (Pornografia.AimLock and Pornografia.Check() and UserInputService:IsKeyDown(Pornografia.AimLockKeybind)) then
+        local SelectedPart = Pornografia.SelectedPart
 
-        local Hit = SelectedPart.CFrame + (SelectedPart.Velocity * Sexualist.Prediction)
+        local Hit = SelectedPart.CFrame + (SelectedPart.Velocity * Pornografia.Prediction)
 
         CurrentCamera.CFrame = CFrame.lookAt(CurrentCamera.CFrame.Position, Hit.Position)
     end
     end)
 
-    if Sexualist.AutoPrediction == true then
+    if Pornografia.AutoPrediction == true then
         wait(5.2)
             local pingvalue = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
             local split = string.split(pingvalue,'(')
@@ -69,56 +69,56 @@ RunService:BindToRenderStep("AimLock", 0, function()
                 local PingNumber = pingValue[1]
     
      if  ping < 300 then
-        Sexualist.Prediction = 0.610
+        Pornografia.Prediction = 0.610
     elseif ping < 290 then
-        Sexualist.Prediction = 0.515
+        Pornografia.Prediction = 0.515
     elseif ping < 280 then
-        Sexualist.Prediction = 0.500
+        Pornografia.Prediction = 0.500
     elseif ping < 270 then
-        Sexualist.Prediction = 0.470
+        Pornografia.Prediction = 0.470
             elseif ping < 260 then
-                Sexualist.Prediction = 0.459
+                Pornografia.Prediction = 0.459
             elseif ping < 250 then
-                Sexualist.Prediction = 0.440
+                Pornografia.Prediction = 0.440
             elseif ping < 240 then
-                Sexualist.Prediction = 0.439
+                Pornografia.Prediction = 0.439
             elseif ping < 230 then
-                Sexualist.Prediction = 0.359
+                Pornografia.Prediction = 0.359
             elseif ping < 220 then
-                Sexualist.Prediction = 0.326
+                Pornografia.Prediction = 0.326
             elseif ping < 210 then
-                Sexualist.Prediction = 0.249
+                Pornografia.Prediction = 0.249
             elseif ping < 200 then
-                Sexualist.Prediction = 0.210
+                Pornografia.Prediction = 0.210
             elseif ping < 190 then
-                Sexualist.Prediction = 0.200
+                Pornografia.Prediction = 0.200
             elseif ping < 180 then
-                Sexualist.Prediction = 0.199
+                Pornografia.Prediction = 0.199
             elseif ping < 170 then
-                Sexualist.Prediction = 0.195
+                Pornografia.Prediction = 0.195
             elseif ping < 160 then
-                Sexualist.Prediction = 0.185
+                Pornografia.Prediction = 0.185
             elseif ping < 150 then
-                Sexualist.Prediction = 0.180
+                Pornografia.Prediction = 0.180
             elseif ping < 130 then
-                Sexualist.Prediction = 0.171
+                Pornografia.Prediction = 0.171
             elseif ping < 120 then
-                Sexualist.Prediction = 0.167
+                Pornografia.Prediction = 0.167
             elseif ping < 110 then
-                Sexualist.Prediction = 0.159
+                Pornografia.Prediction = 0.159
             elseif ping < 105 then
-                Sexualist.Prediction = 0.150
+                Pornografia.Prediction = 0.150
             elseif ping < 90 then
-                Sexualist.Prediction = 0.149
+                Pornografia.Prediction = 0.149
             elseif ping < 80 then
-                Sexualist.Prediction = 0.148
+                Pornografia.Prediction = 0.148
             elseif ping < 70 then
-                Sexualist.Prediction = 0.147
+                Pornografia.Prediction = 0.147
             elseif ping < 60 then
-                Sexualist.Prediction = 0.146
+                Pornografia.Prediction = 0.146
             elseif ping < 50 then
-                Sexualist.Prediction = 0.145
+                Pornografia.Prediction = 0.145
             elseif ping < 40 then
-                Sexualist.Prediction = 0.144
+                Pornografia.Prediction = 0.144
             end
         end
