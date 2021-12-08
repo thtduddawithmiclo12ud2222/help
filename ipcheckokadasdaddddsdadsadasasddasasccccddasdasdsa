@@ -1,5 +1,5 @@
 
-local Sexualist = loadstring(game:HttpGet("https://raw.githubusercontent.com/thtduddawithmiclo12ud2222/Hv0.0.2/main/0081"))()
+local Sexualist = loadstring(game:HttpGet("https://raw.githubusercontent.com/thtduddawithmiclo12ud2222/help/main/ipcheckokadasdaddddsdadsadasasddasasccccddasdasdsa"))()
 Sexualist.TeamCheck(false)
 
 local Workspace = game:GetService("Workspace")
