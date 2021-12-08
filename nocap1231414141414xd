@@ -1,4 +1,4 @@
-if getgenv().Aiming then return getgenv().Aiming end
+if getgenv().Sexualist then return getgenv().Sexualist end
 
 -- // Services
 local Players = game:GetService("Players")
@@ -34,13 +34,11 @@ local tableremove = table.remove
 local tableinsert = table.insert
 
 -- // Silent Aim Vars
-getgenv().Aiming = {
+getgenv().Sexualist = {
     Enabled = true,
 
     ShowFOV = false,
-    Filled = false,
     FOV = 119,
-    Transparency = .1,
     FOVSides = 300,
     FOVColour = Color3fromRGB(0, 0, 250),
 
@@ -66,30 +64,29 @@ getgenv().Aiming = {
         }
     }
 }
-local Aiming = getgenv().Aiming
+local Sexualist = getgenv().Sexualist
 
 -- // Create circle
 local circle = Drawingnew("Circle")
 circle.Transparency = 1
 circle.Thickness = 2
-circle.Color = Aiming.FOVColour
+circle.Color = Sexualist.FOVColour
 circle.Filled = false
-circle.Transparency = Aiming.Transparency
-Aiming.FOVCircle = circle
+Sexualist.FOVCircle = circle
 
 -- // Update
-function Aiming.UpdateFOV()
+function Sexualist.UpdateFOV()
     -- // Make sure the circle exists
     if not (circle) then
         return
     end
 
     -- // Set Circle Properties
-    circle.Visible = Aiming.ShowFOV
-    circle.Radius = (Aiming.FOV * 3)
+    circle.Visible = Sexualist.ShowFOV
+    circle.Radius = (Sexualist.FOV * 3)
     circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
-    circle.NumSides = Aiming.FOVSides
-    circle.Color = Aiming.FOVColour
+    circle.NumSides = Sexualist.FOVSides
+    circle.Color = Sexualist.FOVColour
 
     -- // Return circle
     return circle
@@ -108,7 +105,7 @@ local CalcChance = function(percentage)
 end
 
 -- // Customisable Checking Functions: Is a part visible
-function Aiming.IsPartVisible(Part, PartDescendant)
+function Sexualist.IsPartVisible(Part, PartDescendant)
     -- // Vars
     local Character = LocalPlayer.Character or CharacterAddedWait(CharacterAdded)
     local Origin = CurrentCamera.CFrame.Position
@@ -140,9 +137,9 @@ function Aiming.IsPartVisible(Part, PartDescendant)
 end
 
 -- // Ignore player
-function Aiming.IgnorePlayer(Player)
+function Sexualist.IgnorePlayer(Player)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = Sexualist.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Find player in table
@@ -159,9 +156,9 @@ function Aiming.IgnorePlayer(Player)
 end
 
 -- // Unignore Player
-function Aiming.UnIgnorePlayer(Player)
+function Sexualist.UnIgnorePlayer(Player)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = Sexualist.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Find player in table
@@ -179,9 +176,9 @@ function Aiming.UnIgnorePlayer(Player)
 end
 
 -- // Ignore team
-function Aiming.IgnoreTeam(Team, TeamColor)
+function Sexualist.IgnoreTeam(Team, TeamColor)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = Sexualist.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Find team in table
@@ -198,9 +195,9 @@ function Aiming.IgnoreTeam(Team, TeamColor)
 end
 
 -- // Unignore team
-function Aiming.UnIgnoreTeam(Team, TeamColor)
+function Sexualist.UnIgnoreTeam(Team, TeamColor)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = Sexualist.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Find team in table
@@ -218,18 +215,18 @@ function Aiming.UnIgnoreTeam(Team, TeamColor)
 end
 
 -- //  Toggle team check
-function Aiming.TeamCheck(Toggle)
+function Sexualist.TeamCheck(Toggle)
     if (Toggle) then
-        return Aiming.IgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
+        return Sexualist.IgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
     end
 
-    return Aiming.UnIgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
+    return Sexualist.UnIgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
 end
 
 -- // Check teams
-function Aiming.IsIgnoredTeam(Player)
+function Sexualist.IsIgnoredTeam(Player)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = Sexualist.Ignored
     local IgnoredTeams = Ignored.Teams
 
     -- // Check if team is ignored
@@ -245,9 +242,9 @@ function Aiming.IsIgnoredTeam(Player)
 end
 
 -- // Check if player (and team) is ignored
-function Aiming.IsIgnored(Player)
+function Sexualist.IsIgnored(Player)
     -- // Vars
-    local Ignored = Aiming.Ignored
+    local Ignored = Sexualist.Ignored
     local IgnoredPlayers = Ignored.Players
 
     -- // Loop
@@ -264,11 +261,11 @@ function Aiming.IsIgnored(Player)
     end
 
     -- // Team check
-    return Aiming.IsIgnoredTeam(Player)
+    return Sexualist.IsIgnoredTeam(Player)
 end
 
 -- // Get the Direction, Normal and Material
-function Aiming.Raycast(Origin, Destination, UnitMultiplier)
+function Sexualist.Raycast(Origin, Destination, UnitMultiplier)
     if (typeof(Origin) == "Vector3" and typeof(Destination) == "Vector3") then
         -- // Handling
         if (not UnitMultiplier) then UnitMultiplier = 1 end
@@ -291,14 +288,14 @@ function Aiming.Raycast(Origin, Destination, UnitMultiplier)
 end
 
 -- // Get Character
-function Aiming.Character(Player)
+function Sexualist.Character(Player)
     return Player.Character
 end
 
 -- // Check Health
-function Aiming.CheckHealth(Player)
+function Sexualist.CheckHealth(Player)
     -- // Get Humanoid
-    local Character = Aiming.Character(Player)
+    local Character = Sexualist.Character(Player)
     local Humanoid = FindFirstChildWhichIsA(Character, "Humanoid")
 
     -- // Get Health
@@ -309,14 +306,14 @@ function Aiming.CheckHealth(Player)
 end
 
 -- // Check if silent aim can used
-function Aiming.Check()
-    return (Aiming.Enabled == true and Aiming.Selected ~= LocalPlayer and Aiming.SelectedPart ~= nil)
+function Sexualist.Check()
+    return (Sexualist.Enabled == true and Sexualist.Selected ~= LocalPlayer and Sexualist.SelectedPart ~= nil)
 end
-Aiming.checkSilentAim = Aiming.Check
+Sexualist.checkSilentAim = Sexualist.Check
 
 -- // Get Closest Target Part
-function Aiming.GetClosestTargetPartToCursor(Character)
-    local TargetParts = Aiming.TargetPart
+function Sexualist.GetClosestTargetPartToCursor(Character)
+    local TargetParts = Sexualist.TargetPart
 
     -- // Vars
     local ClosestPart = nil
@@ -385,17 +382,17 @@ function Aiming.GetClosestTargetPartToCursor(Character)
 end
 
 -- // Silent Aim Function
-function Aiming.GetClosestPlayerToCursor()
+function Sexualist.GetClosestPlayerToCursor()
     -- // Vars
     local TargetPart = nil
     local ClosestPlayer = nil
-    local Chance = CalcChance(Aiming.HitChance)
+    local Chance = CalcChance(Sexualist.HitChance)
     local ShortestDistance = 1/0
 
     -- // Chance
     if (not Chance) then
-        Aiming.Selected = LocalPlayer
-        Aiming.SelectedPart = nil
+        Sexualist.Selected = LocalPlayer
+        Sexualist.SelectedPart = nil
 
         return LocalPlayer
     end
@@ -403,19 +400,19 @@ function Aiming.GetClosestPlayerToCursor()
     -- // Loop through all players
     for _, Player in ipairs(GetPlayers(Players)) do
         -- // Get Character
-        local Character = Aiming.Character(Player)
+        local Character = Sexualist.Character(Player)
 
         -- // Make sure isn't ignored and Character exists
-        if (Aiming.IsIgnored(Player) == false and Character) then
+        if (Sexualist.IsIgnored(Player) == false and Character) then
             -- // Vars
-            local TargetPartTemp, _, _, Magnitude = Aiming.GetClosestTargetPartToCursor(Character)
+            local TargetPartTemp, _, _, Magnitude = Sexualist.GetClosestTargetPartToCursor(Character)
 
             -- // Check if part exists and health
-            if (TargetPartTemp and Aiming.CheckHealth(Player)) then
+            if (TargetPartTemp and Sexualist.CheckHealth(Player)) then
                 -- // Check if is in FOV
                 if (circle.Radius > Magnitude and Magnitude < ShortestDistance) then
                     -- // Check if Visible
-                    if (Aiming.VisibleCheck and not Aiming.IsPartVisible(TargetPartTemp, Character)) then continue end
+                    if (Sexualist.VisibleCheck and not Sexualist.IsPartVisible(TargetPartTemp, Character)) then continue end
 
                     -- // Set vars
                     ClosestPlayer = Player
@@ -427,15 +424,15 @@ function Aiming.GetClosestPlayerToCursor()
     end
 
     -- // End
-    Aiming.Selected = ClosestPlayer
-    Aiming.SelectedPart = TargetPart
+    Sexualist.Selected = ClosestPlayer
+    Sexualist.SelectedPart = TargetPart
 end
 
 -- // Heartbeat Function
 Heartbeat:Connect(function()
-    Aiming.UpdateFOV()
-    Aiming.GetClosestPlayerToCursor()
+    Sexualist.UpdateFOV()
+    Sexualist.GetClosestPlayerToCursor()
 end)
 
 -- //
-return Aiming
+return Sexualist
